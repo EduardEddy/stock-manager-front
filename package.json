@@ -28,7 +28,8 @@
     "redux": "^5.0.1",
     "sass": "1.85.1",
     "styled-components": "^6.1.15",
-    "sweetalert2": "^11.17.2"
+    "sweetalert2": "^11.17.2",
+    "cross-env": "^7.0.3"
   },
   "optionalDependencies": {
     "jquery": "3.7.1",
@@ -61,7 +62,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "cross-env": "^7.0.3"
-  }
+  "devDependencies": {}
 }
