@@ -1,11 +1,11 @@
 // src/services/httpClient.js
 
 import axios from 'axios';
-//import envs from '../config/envs';
+import envs from '../config/envs';
 
 // Crear una instancia de Axios
 const httpClient = axios.create({
-  baseURL: `http://localhost:3001/api`, // Base URL de la API
+  baseURL: envs.apiServer,//`http://localhost:3001/api`, // Base URL de la API
   timeout: 10000, // Tiempo de espera (opcional)
   headers: {
     'Content-Type': 'application/json',
