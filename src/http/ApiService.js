@@ -1,18 +1,17 @@
-// src/services/httpClient.js
-
 import axios from 'axios';
-import envs from '../config/envs';
+import { envs } from '../config/envs';
 
 // Crear una instancia de Axios
 const httpClient = axios.create({
-  baseURL: envs.apiServer,//`http://localhost:3001/api`, // Base URL de la API
-  timeout: 10000, // Tiempo de espera (opcional)
+  baseURL: envs.apiServer,
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Método GET
+// Métodos (como los tienes, están bien)
+
 export const get = async (url, headers = {}) => {
   try {
     const response = await httpClient.get(url, { headers });
@@ -23,12 +22,9 @@ export const get = async (url, headers = {}) => {
   }
 };
 
-// Método POST
 export const post = async (url, data, headers = {}) =>
   await httpClient.post(url, data, { headers });
 
-
-// Método PUT
 export const put = async (url, data, headers = {}) => {
   try {
     const response = await httpClient.put(url, data, { headers });
@@ -39,7 +35,6 @@ export const put = async (url, data, headers = {}) => {
   }
 };
 
-// Método DELETE
 export const remove = async (url, headers = {}) => {
   try {
     const response = await httpClient.delete(url, { headers });
