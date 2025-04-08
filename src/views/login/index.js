@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/authActions';
+import { splitIntoSegments } from '../../../build/static/media/index.6f296468231c5dacc283.cjs';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -74,6 +75,7 @@ const Login = () => {
                             onChange={(e) => {
                               setEmail(e.target.value);
                               setIsEmailError(false);
+                              setErrorLogin(false);
                             }}
                           ></input>
                         </div>
@@ -111,7 +113,7 @@ const Login = () => {
                     }
                     <Row>
                       <Col xs={6}>
-                        <Button className="btn btn-primary btn-fill" onClick={handleLogin}>
+                        <Button className="btn btn-primary btn-fill" onClick={handleLogin} disabled={isSpin}>
                           <i class="fa-solid fa-lock-open"></i>&nbsp;
                           Login
                         </Button>
