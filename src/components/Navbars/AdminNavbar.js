@@ -10,6 +10,7 @@ function Header() {
   const { token, user } = useSelector((state) => state.auth);
   const location = useLocation();
   const dispath = useDispatch();
+  console.log(user)
 
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
@@ -66,7 +67,7 @@ function Header() {
           <span className="navbar-toggler-bar burger-lines"></span>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="nav mr-auto" navbar>
+          <Nav className="nav ms-auto" navbar>
             <Nav.Item>
               <Nav.Link
                 data-toggle="dropdown"
@@ -125,7 +126,7 @@ function Header() {
             </Dropdown>
           </Nav>
           <Nav className="ml-auto" navbar>
-            <Nav.Item>
+            {/*<Nav.Item>
               <Nav.Link
                 className="m-0"
                 href="#pablo"
@@ -133,7 +134,7 @@ function Header() {
               >
                 <span className="no-icon">{user?.name}</span>
               </Nav.Link>
-            </Nav.Item>
+            </Nav.Item>*/}
             <Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 aria-expanded={false}

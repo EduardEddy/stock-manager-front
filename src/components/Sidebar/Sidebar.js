@@ -4,14 +4,19 @@ import { useLocation, NavLink } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 
 import logo from "assets/img/reactlogo.png";
+import { useDispatch, useSelector } from "react-redux";
 
 function Sidebar({ color, image, routes }) {
+  const { user } = useSelector((state) => state.auth);
+  const [profile, setProfile] = React.useState(null)
   const location = useLocation();
   const activeRoute = (routeName) => {
     return location.pathname.indexOf(routeName) > -1 ? "active" : "";
   };
 
-  console.log("routes", routes);
+  React.useEffect(() => {
+    setProfile(user.role);
+  }, [user])
 
   return (
     <div className="sidebar" data-image={image} data-color={color}>
@@ -39,25 +44,26 @@ function Sidebar({ color, image, routes }) {
           {routes.map((prop, key) => {
             if (prop.name)
               if (!prop.redirect)
-                return (
-                  <li
-                    className={
-                      prop.upgrade
-                        ? "active active-pro"
-                        : activeRoute(prop.layout + prop.path)
-                    }
-                    key={key}
-                  >
-                    <NavLink
-                      to={prop.layout + prop.path}
-                      className="nav-link"
-                      activeClassName="active"
+                if (prop.roles.includes(profile))
+                  return (
+                    <li
+                      className={
+                        prop.upgrade
+                          ? "active active-pro"
+                          : activeRoute(prop.layout + prop.path)
+                      }
+                      key={key}
                     >
-                      <i className={prop.icon} />
-                      <p>{prop.name}</p>
-                    </NavLink>
-                  </li>
-                );
+                      <NavLink
+                        to={prop.layout + prop.path}
+                        className="nav-link"
+                        activeClassName="active"
+                      >
+                        <i className={prop.icon} />
+                        <p>{prop.name}</p>
+                      </NavLink>
+                    </li>
+                  );
             return null;
           })}
         </Nav>

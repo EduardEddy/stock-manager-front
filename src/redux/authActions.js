@@ -12,6 +12,7 @@ export const login = (email, password) => async (dispatch) => {
       email: response.data.email,
       name: response.data.name,
       lastName: response.data.lastName,
+      role: response.data.role
     };
 
     const token = response.data.token;

@@ -100,7 +100,7 @@ const Sales = () => {
           <div className="col-3">
             <h3>Ventas</h3>
           </div>
-          <div className="col-3">
+          <div className="col-3 text-end">
             <button className="btn btn-primary" onClick={handleShow}>
               <icon className="nc-icon nc-simple-add"></icon> Nueva venta
             </button>

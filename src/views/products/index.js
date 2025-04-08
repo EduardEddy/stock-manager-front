@@ -78,11 +78,11 @@ const Products = () => {
   return (
     <Card>
       <Card.Header>
-        <div className="row">
-          <div className="col-md-3">
+        <div className="row justify-content-between">
+          <div className="col-3">
             <h3>Productos</h3>
           </div>
-          <div className="col-md-3 ml-auto">
+          <div className="col-3 text-end">
             <a href="/admin/products/new" className="btn btn-primary">
               <icon className="nc-icon nc-simple-add"></icon> Agregar nuevo
             </a>

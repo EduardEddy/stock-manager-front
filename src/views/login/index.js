@@ -17,9 +17,11 @@ const Login = () => {
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
   const [errorLogin, setErrorLogin] = useState(false);
+  const [isSpin, setIsSpin] = useState(false);
   const dispath = useDispatch();
 
   const handleLogin = async () => {
+    setIsSpin(true)
     if (!email) {
       setIsEmailError(true);
     }
@@ -40,6 +42,8 @@ const Login = () => {
       setErrorLogin(true);
     } catch (error) {
       console.log("Error", error);
+    } finally {
+      setIsSpin(false)
     }
   }
 
@@ -58,8 +62,10 @@ const Login = () => {
                       <label style={{ fontSize: 16, fontWeight: 'bold' }}>Email:</label>
                       <div className="mb-2">
                         <div className="input-group">
-                          <div className="input-group-prepend" style={{ height: 42 }}>
-                            <div className="input-group-text">@</div>
+                          <div className="input-group-prepend">
+                            <div className="input-group-text" style={{ height: 40 }}>
+                              <i class="fa-solid fa-envelope"></i>
+                            </div>
                           </div>
                           <input
                             type="email"
@@ -81,7 +87,7 @@ const Login = () => {
                         <div className="input-group">
                           <div className="input-group-prepend">
                             <div className="input-group-text" style={{ height: 40 }}>
-                              <i className="nc-icon nc-key-25"></i>
+                              <i class="fa-solid fa-key"></i>
                             </div>
                           </div>
                           <input
@@ -99,10 +105,14 @@ const Login = () => {
                     </div>
 
                     {errorLogin && <small style={{ color: 'red' }}>Credenciales inválidas</small>}
-
+                    {
+                      isSpin &&
+                      <i class="fa-solid fa-circle-notch fa-spin"></i>
+                    }
                     <Row>
                       <Col xs={6}>
                         <Button className="btn btn-primary btn-fill" onClick={handleLogin}>
+                          <i class="fa-solid fa-lock-open"></i>&nbsp;
                           Login
                         </Button>
                       </Col>
