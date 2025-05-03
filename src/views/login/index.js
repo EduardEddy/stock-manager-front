@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/authActions';
-import { splitIntoSegments } from '../../../build/static/media/index.6f296468231c5dacc283.cjs';
 
 const Login = () => {
   const [email, setEmail] = useState('');

@@ -5,6 +5,8 @@ import DataTable from 'react-data-table-component';
 import { get } from "http/ApiService";
 import handleFormatCurrency from "utils/formatCurrency";
 import CreateSale from "./modal/create";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 const Sales = () => {
   const { token } = useSelector((state) => state.auth);
@@ -37,6 +39,8 @@ const Sales = () => {
         'Authorization': `Bearer ${token}`,
       });
       setData(response);
+      console.log("response");
+      console.log(response[0]);
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -52,24 +56,27 @@ const Sales = () => {
     },
     {
       name: 'Nombre',
-      selector: row => row.product.name,
+      selector: row => {
+        return row?.items?.map(item => item?.product?.name).join(', ');
+      },
       sortable: true,
     },
     {
-      name: 'Cantidad',
-      selector: row => row.quantity,
+      name: 'Vendido por',
+      selector: row => row.saleMedia?.name,
       sortable: true,
     },
     {
-      name: 'Precio Venta',
-      selector: row => handleFormatCurrency(row.unitPrice),
+      name: 'Fecha Venta',
+      selector: row => format(new Date(row.createdAt), "d 'de' LLLL 'de' yyyy", { locale: es }),
+
       sortable: true,
     },
-    {
+    /*{
       name: 'Precio Vendido',
       selector: row => handleFormatCurrency(row.newPrice),
       sortable: true,
-    },
+    },*/
 
     {
       name: 'Total',
@@ -104,7 +111,7 @@ const Sales = () => {
             <button className="btn btn-primary" onClick={handleShow}>
               <icon className="nc-icon nc-simple-add"></icon> Nueva venta
             </button>
-            <CreateSale show={show} handleClose={handleClose} products={products} />
+            <CreateSale show={show} handleClose={handleClose} products={products} getData={handleGetData} />
           </div>
         </div>
       </Card.Header>
